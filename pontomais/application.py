@@ -1,6 +1,7 @@
 from cleo import Application as BaseApplication
 
 from commands.about import AboutCommand
+from commands.configure import ConfigureCommand
 
 try:
     from pontomais.__version__ import __version__
@@ -16,5 +17,5 @@ class Application(BaseApplication):
             self.add(command)
 
     def get_default_commands(self) -> list:
-        commands = [AboutCommand()]
+        commands = [AboutCommand(), ConfigureCommand()]
         return commands

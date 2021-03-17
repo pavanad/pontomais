@@ -11,6 +11,6 @@ class AboutCommand(Command):
         custom_fig = Figlet(font="big")
         title = custom_fig.renderText("pontomais cli")
         self.line(
-        f"""{title}\n<info>Essa ferramenta foi desenvolvida para facilitar a utilização do app pontomais.</info>
+            f"""{title}\n<info>This tool was developed to facilitate the use of the pontomais app.</info>
             """
-        )
+        )   
