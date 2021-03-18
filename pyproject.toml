@@ -8,6 +8,7 @@ authors = ["Adilson Pavan <adilson.pavan@gmail.com>"]
 python = "^3.7"
 cleo = "^0.8.1"
 pyfiglet = "^0.8.post1"
+requests = "^2.25.1"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
