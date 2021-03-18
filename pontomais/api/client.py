@@ -3,7 +3,7 @@ import json
 import uuid
 
 import requests
-from pontomais.config.settings import get_configurations
+from config.settings import get_configurations
 
 
 class PontoMaisClient:
@@ -76,12 +76,13 @@ class PontoMaisClient:
         self.__username = username
         self.__password = password
 
-    def authenticate(self):
+    def authenticate(self) -> bool:
         """Authenticates to the api."""
 
         token = None
         client = None
         expiry = None
+        authenticated = False
 
         # case not credentials try get configurations
         if not all([self.__username, self.__password]):
@@ -92,6 +93,7 @@ class PontoMaisClient:
         response = requests.post(auth_url, data=credentials)
 
         if response.content and response.status_code == 201:
+            authenticated = True
             response_json = response.json()
             token = response_json.get("token")
             client = response_json.get("client_id")
@@ -100,6 +102,8 @@ class PontoMaisClient:
         self.__token = token
         self.__client = client
         self.__expiry = expiry
+
+        return authenticated
 
     def work_day(self, day: str) -> dict:
         """Get work day.
