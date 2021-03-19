@@ -7,7 +7,7 @@ from config import settings
 class ConfigureCommand(BaseCommand):
     name = "configure"
     description = (
-        "This command set up API credentials and the address used in the pontomais."
+        "This command set up API credentials and the address used in the pontomais"
     )
 
     def __create_question(self, text, validator):

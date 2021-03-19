@@ -4,8 +4,7 @@ from pyfiglet import Figlet
 
 class AboutCommand(Command):
     name = "about"
-
-    description = "Shows information about pontomais cli."
+    description = "Shows information about pontomais cli"
 
     def handle(self):
         custom_fig = Figlet(font="big")
@@ -13,4 +12,4 @@ class AboutCommand(Command):
         self.line(
             f"""{title}\n<info>This tool was developed to facilitate the use of the pontomais app.</info>
             """
-        )   
+        )

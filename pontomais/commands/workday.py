@@ -4,7 +4,7 @@ from api.client import PontoMaisClient
 
 class WorkdayCommand(BaseCommand):
     """
-    Get information about the work day.
+    Get information about the work day
 
     workday
         {day? : Put the workday (example: YYYY-MM-DD)}
