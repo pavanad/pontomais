@@ -28,15 +28,23 @@ class WorkdayCommand(BaseCommand):
             "<error>Unable to log in to the API, check your credentials.</error>\n"
         )
 
-    def __show_results(self, results: dict):        
-        self.line("All points of the day.\n")
+    def __show_results(self, results: dict):
+
+        workday = results["work_day"]
+        time_cards = workday["time_cards"]
+        if not len(time_cards):
+            self.line("No information found for that day.\n")
+            return
+
+        self.line("All points of the day:")
+        if len(time_cards) < 4:
+            self.line("<error>Ops! Your records are incomplete.</error>")
 
         table = self.table()
         table.set_header_row(["Registro", "Recibo", "Horário"])
 
         rows = []
-        workday = results["work_day"]
-        for index, card in enumerate(workday["time_cards"]):
+        for index, card in enumerate(time_cards):
             register = (
                 "<fg=yellow>Entrada</>" if (index + 1) % 2 else "<fg=green>Saída</>"
             )
@@ -44,7 +52,4 @@ class WorkdayCommand(BaseCommand):
 
         table.set_rows(rows)
         table.render(self.io)
-
         self.line("")
-        if len(workday["time_cards"]) < 4:
-            self.line("<error>Ops! Your records are incomplete.</error>\n")

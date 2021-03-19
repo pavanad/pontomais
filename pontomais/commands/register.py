@@ -12,8 +12,12 @@ class RegisterCommand(BaseCommand):
         pontomais = PontoMaisClient()
         auth = pontomais.authenticate()
         if auth:
-            response = pontomais.register()
-            print(response)
+            if self.confirm(f"{self.PREFIX}Continue with this action?", False):
+                response = pontomais.register()
+                if "success" in response:
+                    self.line("<info>Successfully registered</info>")
+                    self.line(f"Your ip: {response['meta']['ip']}")
+                    self.line(f"Your receipt: {response['receipt']}\n")
             return
 
         self.line(

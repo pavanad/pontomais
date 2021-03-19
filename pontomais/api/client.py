@@ -156,6 +156,6 @@ class PontoMaisClient:
             "_appVersion": "0.10.32",
         }
         response = requests.post(
-            url, headers=self.__get_header(), data=json.dumps(payload, verify=False)
+            url, headers=self.__get_header(), data=json.dumps(payload)
         )
         return response.json()
