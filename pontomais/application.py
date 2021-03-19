@@ -1,9 +1,9 @@
 from cleo import Application as BaseApplication
 
-from commands.about import AboutCommand
-from commands.configure import ConfigureCommand
-from commands.workday import WorkdayCommand
-from commands.register import RegisterCommand
+from .commands.about import AboutCommand
+from .commands.configure import ConfigureCommand
+from .commands.workday import WorkdayCommand
+from .commands.register import RegisterCommand
 
 try:
     from pontomais.__version__ import __version__

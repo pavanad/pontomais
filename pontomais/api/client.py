@@ -3,7 +3,7 @@ import json
 import uuid
 
 import requests
-from config.settings import get_configurations
+from pontomais.config.settings import get_configurations
 
 
 class PontoMaisClient:

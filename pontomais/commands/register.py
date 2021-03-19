@@ -1,5 +1,6 @@
+from pontomais.api.client import PontoMaisClient
+
 from .base import BaseCommand
-from api.client import PontoMaisClient
 
 
 class RegisterCommand(BaseCommand):

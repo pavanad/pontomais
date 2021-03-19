@@ -1,7 +1,8 @@
 import os
 
+from pontomais.config import settings
+
 from .base import BaseCommand
-from config import settings
 
 
 class ConfigureCommand(BaseCommand):

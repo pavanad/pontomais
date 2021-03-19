@@ -130,4 +130,5 @@ dmypy.json
 
 .vscode
 poetry.lock
+.DS_Store
 

@@ -1,5 +1,6 @@
+from pontomais.api.client import PontoMaisClient
+
 from .base import BaseCommand
-from api.client import PontoMaisClient
 
 
 class WorkdayCommand(BaseCommand):
@@ -27,8 +28,7 @@ class WorkdayCommand(BaseCommand):
             "<error>Unable to log in to the API, check your credentials.</error>\n"
         )
 
-    def __show_results(self, results: dict):
-        self.line("")
+    def __show_results(self, results: dict):        
         self.line("All points of the day.\n")
 
         table = self.table()
