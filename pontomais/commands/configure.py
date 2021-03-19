@@ -1,10 +1,10 @@
 import os
 
-from cleo import Command
+from .base import BaseCommand
 from config import settings
 
 
-class ConfigureCommand(Command):
+class ConfigureCommand(BaseCommand):
     name = "configure"
     description = (
         "This command set up API credentials and the address used in the pontomais."
@@ -22,14 +22,18 @@ class ConfigureCommand(Command):
 
         # user info
         self.line("")
-        username = self.ask("Pontomais username:")
-        password = self.secret("Pontomais password:")
+        username = self.ask(f"{self.PREFIX}Pontomais username:")
+        password = self.secret(f"{self.PREFIX}Pontomais password:")
 
         # address info
         self.line("")
-        latitude = self.__create_question("Latitude of the workplace:", float)
-        longitude = self.__create_question("Longitude of the workplace:", float)
-        address = self.ask("Address of where you are working:")
+        latitude = self.__create_question(
+            f"{self.PREFIX}Latitude of the workplace:", float
+        )
+        longitude = self.__create_question(
+            f"{self.PREFIX}Longitude of the workplace:", float
+        )
+        address = self.ask(f"{self.PREFIX}Address of where you are working:")
 
         filename = os.path.join(settings.CONFIG_ROOT_PATH, settings.CONFIG_FILENAME)
         with open(filename, "w") as config_file:
