@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pontomais"
-version = "0.1.0"
+version = "0.1.2"
 description = ""
 authors = ["Adilson Pavan <adilson.pavan@gmail.com>"]
 
