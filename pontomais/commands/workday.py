@@ -13,8 +13,14 @@ class WorkdayCommand(BaseCommand):
 
     def handle(self):
         self.line("")
-        pontomais = PontoMaisClient()
-        auth = pontomais.authenticate()
+
+        try:
+            pontomais = PontoMaisClient()
+            auth = pontomais.authenticate()
+        except Exception as error:
+            self.line(f"<error>{error}</error>\n")
+            return
+
         if auth:
             day = self.argument("day")
             response = pontomais.work_day(day) if day else pontomais.current_work_day()

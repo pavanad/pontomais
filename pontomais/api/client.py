@@ -14,6 +14,7 @@ class PontoMaisClient:
         self.__username = username
         self.__password = password
         self.__uuid = str(uuid.uuid1())
+        self.__session = requests.Session()
 
     def __get_auth_url(self) -> str:
         """Get auth url for authentication.
@@ -35,6 +36,12 @@ class PontoMaisClient:
             self.__address = config.get("location", "address")
             self.__latitude = config.get("location", "latitude")
             self.__longitude = config.get("location", "longitude")
+
+        if config.has_section("proxy"):
+            self.__session.proxies = {
+                "http": config.get("proxy", "http"),
+                "https": config.get("proxy", "https"),
+            }
 
     def __get_header(self) -> dict:
         return {
@@ -90,7 +97,7 @@ class PontoMaisClient:
 
         auth_url = self.__get_auth_url()
         credentials = {"login": self.__username, "password": self.__password}
-        response = requests.post(auth_url, data=credentials)
+        response = self.__session.post(auth_url, data=credentials)
 
         if response.content and response.status_code == 201:
             authenticated = True
@@ -115,7 +122,7 @@ class PontoMaisClient:
             dict: data of the work day
         """
         url = f"{self.BASE_URL}/api/time_card_control/current/work_days/{day}"
-        response = requests.get(url, headers=self.__get_header())
+        response = self.__session.get(url, headers=self.__get_header())
         return response.json()
 
     def current_work_day(self) -> dict:
@@ -155,7 +162,7 @@ class PontoMaisClient:
             },
             "_appVersion": "0.10.32",
         }
-        response = requests.post(
+        response = self.__session.post(
             url, headers=self.__get_header(), data=json.dumps(payload)
         )
         return response.json()

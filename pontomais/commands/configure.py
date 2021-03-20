@@ -1,4 +1,5 @@
 import os
+from configparser import ConfigParser
 
 from pontomais.config import settings
 
@@ -12,7 +13,7 @@ class ConfigureCommand(BaseCommand):
     )
 
     def __create_question(self, text, validator):
-        question = self.create_question(text)
+        question = self.create_question(text, default="")
         question.set_validator(validator)
         return self.ask(question)
 
@@ -23,7 +24,7 @@ class ConfigureCommand(BaseCommand):
 
         # user info
         self.line("")
-        username = self.ask(f"{self.PREFIX}Pontomais username:")
+        username = self.ask(f"{self.PREFIX}Pontomais username:", "")
         password = self.secret(f"{self.PREFIX}Pontomais password:")
 
         # address info
@@ -35,13 +36,13 @@ class ConfigureCommand(BaseCommand):
             f"{self.PREFIX}Longitude of the workplace:", float
         )
         address = self.ask(f"{self.PREFIX}Address of where you are working:")
+        self.line("")
 
-        filename = os.path.join(settings.CONFIG_ROOT_PATH, settings.CONFIG_FILENAME)
-        with open(filename, "w") as config_file:
-            config_file.write("[user]\n")
-            config_file.write(f"username = {username}\n")
-            config_file.write(f"password = {password}\n\n")
-            config_file.write("[location]\n")
-            config_file.write(f"latitude = {latitude}\n")
-            config_file.write(f"longitude = {longitude}\n")
-            config_file.write(f"address = {address}\n")
+        config = ConfigParser()
+        config["user"] = {"username": username, "password": password}
+        config["location"] = {
+            "latitude": latitude,
+            "longitude": longitude,
+            "address": address,
+        }
+        settings.set_configurations(config)

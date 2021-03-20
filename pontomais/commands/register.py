@@ -9,8 +9,14 @@ class RegisterCommand(BaseCommand):
 
     def handle(self):
         self.line("")
-        pontomais = PontoMaisClient()
-        auth = pontomais.authenticate()
+
+        try:
+            pontomais = PontoMaisClient()
+            auth = pontomais.authenticate()
+        except Exception as error:
+            self.line(f"<error>{error}</error>\n")
+            return
+
         if auth:
             if self.confirm(f"{self.PREFIX}Continue with this action?", False):
                 response = pontomais.register()

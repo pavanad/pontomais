@@ -18,3 +18,9 @@ def get_configurations() -> ConfigParser:
     configuration = ConfigParser()
     configuration.read(os.path.join(CONFIG_ROOT_PATH, CONFIG_FILENAME))
     return configuration
+
+
+def set_configurations(configuration: ConfigParser):
+    filename = os.path.join(CONFIG_ROOT_PATH, CONFIG_FILENAME)
+    with open(filename, "w") as config_file:
+        configuration.write(config_file)
