@@ -97,3 +97,7 @@ Caso precise configurar um proxy da empresa que está trabalhando tente usar o c
 **Consultando os pontos registrados em uma data**
 
 ![](images/workday.gif)
+
+**Registrando o ponto**
+
+![](images/register.gif)
