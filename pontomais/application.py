@@ -1,10 +1,11 @@
 from cleo import Application as BaseApplication
 
 from .commands.about import AboutCommand
+from .commands.comp_time import CompTimeCommand
 from .commands.configure import ConfigureCommand
-from .commands.workday import WorkdayCommand
-from .commands.register import RegisterCommand
 from .commands.proxy import ProxyCommand
+from .commands.register import RegisterCommand
+from .commands.workday import WorkdayCommand
 
 try:
     from pontomais.__version__ import __version__
@@ -26,5 +27,6 @@ class Application(BaseApplication):
             WorkdayCommand(),
             RegisterCommand(),
             ProxyCommand(),
+            CompTimeCommand(),
         ]
         return commands

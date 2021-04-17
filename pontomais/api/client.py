@@ -167,3 +167,6 @@ class PontoMaisClient:
             url, headers=self.__get_header(), data=json.dumps(payload)
         )
         return response.json()
+
+    def get_comp_time(self):
+        pass
