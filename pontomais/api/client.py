@@ -38,6 +38,7 @@ class PontoMaisClient:
             self.__longitude = config.get("location", "longitude")
 
         if config.has_section("proxy"):
+            self.__session.verify = False
             self.__session.proxies = {
                 "http": config.get("proxy", "http"),
                 "https": config.get("proxy", "https"),
