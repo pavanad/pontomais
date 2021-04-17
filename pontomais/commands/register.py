@@ -5,6 +5,13 @@ from .base import BaseCommand
 
 
 class RegisterCommand(BaseCommand):
+    """
+    Register on time card
+
+    register
+        {--y|yes : Automatic yes to prompts}
+    """
+
     name = "register"
     description = "Register on time card"
 
@@ -23,7 +30,12 @@ class RegisterCommand(BaseCommand):
             return
 
         if auth:
-            if self.confirm(f"{self.PREFIX}Continue with this action?", False):
+            confirmed = (
+                self.option("yes")
+                if self.option("yes")
+                else self.confirm(f"{self.PREFIX}Continue with this action?", False)
+            )
+            if confirmed:
                 response = pontomais.register()
                 if "success" in response:
                     self.line("<info>Successfully registered</info>")
