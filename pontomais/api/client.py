@@ -62,6 +62,15 @@ class PontoMaisClient:
             "content-type": "application/json",
         }
 
+    def __get_employee_id(self) -> str:
+        employee_id = ""
+        url = f"{self.BASE_URL}/api/employees/my_time_break"
+        response = self.__session.get(url, headers=self.__get_header())
+        if response.content and response.status_code == 200:
+            response_json = response.json()
+            employee_id = response_json["employee"]["id"]
+        return employee_id
+
     def set_location(self, address: str, latitude: float, longitude: float):
         """Set address of where you are working.
 
@@ -169,4 +178,13 @@ class PontoMaisClient:
         return response.json()
 
     def get_comp_time(self):
-        pass
+        comp_time = {}
+        employee_id = self.__get_employee_id()
+        url = f"{self.BASE_URL}/api/employees/statuses/{employee_id}"
+        response = self.__session.get(url, headers=self.__get_header())
+        if response.content and response.status_code == 200:
+            response_json = response.json()
+            statuses = response_json["statuses"]
+            comp_time["time_balance"] = statuses["time_balance"]
+            comp_time["updated_at"] = statuses["last_settle_time_balance"]["updated_at"]
+        return comp_time

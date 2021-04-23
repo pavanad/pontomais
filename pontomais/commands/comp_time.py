@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from pontomais.api.client import PontoMaisClient
 from requests.exceptions import ProxyError
 
@@ -24,7 +26,16 @@ class CompTimeCommand(BaseCommand):
 
         if auth:
             response = pontomais.get_comp_time()
-            print(response)
+            if response.get("time_balance") is None:
+                self.line("No information found for comp time.\n")
+            else:
+                tb_seconds = int(response["time_balance"])
+                time_balance = str(timedelta(seconds=abs(tb_seconds)))
+                color = "<fg=green>" if tb_seconds >= 0 else "<fg=red>-"
+
+                updated_at = datetime.fromisoformat(response["updated_at"])
+                self.line(f"Comp time: {color}{time_balance}</>")
+                self.line(f"Last updated: {updated_at.strftime('%d/%m/%Y')}\n")
             return
 
         self.line(
