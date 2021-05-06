@@ -37,10 +37,9 @@ class RegisterCommand(BaseCommand):
             )
             if confirmed:
                 response = pontomais.register()
-                if "success" in response:
+                if "meta" in response:
                     self.line("<info>Successfully registered</info>")
-                    self.line(f"Your ip: {response['meta']['ip']}")
-                    self.line(f"Your receipt: {response['receipt']}\n")
+                    self.line(f"Your ip: {response['meta']['ip']}\n")
             return
 
         self.line(
