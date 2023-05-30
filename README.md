@@ -1,5 +1,9 @@
 # Pontomais
 
+> **Warning**
+> Devido a falta de acesso a interface do Pontomais o projeto foi descontinuado, mas com pequenas alterações ainda pode ser utilizado.
+> Sinta-se à vontade para utilizar o projeto e/ou modificá-lo para suas necessidades.
+
 Projeto criado para facilitar a utilização do app pontomais com outras aplicações ou para o registro e a consulta dos pontos no dia a dia com a ferramenta de linha de comando.
 
 A ideia é ter um modúlo que pode ser utilizado pelo cli ou integrando com outras aplicações potencializando as funcionalidades como por exemplo a integração com o Google Assistant (objetivo principal). 
